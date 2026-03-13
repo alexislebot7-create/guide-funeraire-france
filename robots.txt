@@ -1,0 +1,2 @@
+User-agent: *
+Allow: /\nSitemap: https://guide-funeraire-france.fr/sitemap.xml\n
