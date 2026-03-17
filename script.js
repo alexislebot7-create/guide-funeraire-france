@@ -232,15 +232,37 @@ async function shareSite() {
   const mailto = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n\n' + url)}`;
   window.location.href = mailto;
 }
+// Scroll auto sur mobile pour afficher le titre de la sous-partie en haut
 window.addEventListener('load', () => {
-  const target = document.querySelector('main');
-  if (target) {
-    const offset = 180; // ajuste ici si besoin
-    const position = target.getBoundingClientRect().top + window.scrollY - offset;
+  if (window.innerWidth > 768) return;
+
+  const isHomePage =
+    window.location.pathname.endsWith('/') ||
+    window.location.pathname.endsWith('/index.html') ||
+    window.location.pathname === '/index.html';
+
+  if (isHomePage) return;
+
+  const title =
+    document.querySelector('main h1') ||
+    document.querySelector('main h2');
+
+  if (!title) return;
+
+  setTimeout(() => {
+    const header = document.querySelector('.site-header');
+    const headerHeight = header ? header.offsetHeight : 0;
+    const extraSpace = 16;
+
+    const targetY =
+      title.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerHeight -
+      extraSpace;
 
     window.scrollTo({
-      top: position,
+      top: Math.max(targetY, 0),
       behavior: 'smooth'
     });
-  }
+  }, 300);
 });
