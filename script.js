@@ -232,10 +232,15 @@ async function shareSite() {
   const mailto = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n\n' + url)}`;
   window.location.href = mailto;
 }
-// Scroll auto au chargement (mobile)
 window.addEventListener('load', () => {
   const target = document.querySelector('main');
   if (target) {
-    target.scrollIntoView({ behavior: 'smooth' });
+    const offset = 100; // ajuste ici si besoin
+    const position = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top: position,
+      behavior: 'smooth'
+    });
   }
 });
