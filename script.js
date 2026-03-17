@@ -232,14 +232,10 @@ async function shareSite() {
   const mailto = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n\n' + url)}`;
   window.location.href = mailto;
 }
-// Scroll automatique vers la sous-partie ouverte (mobile)
-document.querySelectorAll('.links-list a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    setTimeout(() => {
-      const target = document.querySelector('main');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 300);
-  });
+// Scroll auto au chargement (mobile)
+window.addEventListener('load', () => {
+  const target = document.querySelector('main');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
 });
