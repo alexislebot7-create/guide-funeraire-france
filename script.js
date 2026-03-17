@@ -235,7 +235,7 @@ async function shareSite() {
 window.addEventListener('load', () => {
   const target = document.querySelector('main');
   if (target) {
-    const offset = 300; // ajuste ici si besoin
+    const offset = 10; // ajuste ici si besoin
     const position = target.getBoundingClientRect().top + window.scrollY - offset;
 
     window.scrollTo({
